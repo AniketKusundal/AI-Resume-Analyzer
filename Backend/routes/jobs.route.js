@@ -11,15 +11,13 @@ router.post('/addJob' , protect , async(req , res)=> {
     {
         const {company_name , apply_status , role , note} = req.body;
         
-        const newJob =  await Job.create({
+        const job = await Job.create({
             userId : req.user._id,
             company_name,
             apply_status,
             role,
             note,
-        })
-
-        const job = newJob.toString()
+        });
 
         return res.status(200).json({
             Message : "Job Added Successfully",
@@ -131,7 +129,7 @@ router.put("/:id" , protect , async(req , res) => {
         job.apply_status = apply_status || job.apply_status;
         job.note = note || job.note;
 
-        const UpdateJob = job.save().toString();
+        await job.save();
 
         return res.status(200).json({
             Message : "Updated Successfully",

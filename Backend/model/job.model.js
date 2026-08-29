@@ -28,7 +28,7 @@ const JobSchema = new mongoose.Schema({
 
     appliedDate : {
         type : Date,
-        default :Date.now(),
+        default : Date.now,
     },
 
     note : {
